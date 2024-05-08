@@ -17,11 +17,18 @@ class AnnouncementController extends Controller
         $offset = request('offset', 0);
         $limit = request('limit', 100);
         $count = Announcement::count();
-        $announcements = Announcement::select()->orderBy('date', 'desc')->offset($offset)->limit($limit)->get();
+        $announcements = Announcement::with('author')->select()->orderBy('date', 'desc')->offset($offset)->limit($limit)->get();
         return response([
             'data' => [
                 'totalCount' => $count,
-                'announcements' => $announcements,
+                'announcements' => $announcements->map(function(Announcement $announcement) {
+                    return [
+                        'id' => $announcement->id,
+                        'date' => $announcement->date,
+                        'body' => $announcement->body,
+                        'author' => $announcement->author->name,
+                    ];
+                }),
             ]
         ]);
     }

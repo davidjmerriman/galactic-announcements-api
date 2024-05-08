@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Author;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +22,7 @@ class AnnouncementFactory extends Factory
         $search = $faker->word();
 
         return [
-            'author' => $faker->name(),
+            'author_id' => Author::all()->random()->id,
             'date' => $faker->dateTimeThisYear(),
             'body' => $faker->markdown() . PHP_EOL . PHP_EOL . '[Find ' . $search . '](https://www.google.com/search?q=' . $search . ')',
         ];
