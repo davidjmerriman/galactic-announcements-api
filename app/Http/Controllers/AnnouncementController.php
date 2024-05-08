@@ -24,6 +24,7 @@ class AnnouncementController extends Controller
                 'announcements' => $announcements->map(function(Announcement $announcement) {
                     return [
                         'id' => $announcement->id,
+                        'author_id' => $announcement->author_id,
                         'date' => $announcement->date,
                         'body' => $announcement->body,
                         'author' => $announcement->author->name,
