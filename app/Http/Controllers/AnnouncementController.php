@@ -19,18 +19,16 @@ class AnnouncementController extends Controller
         $count = Announcement::count();
         $announcements = Announcement::with('author')->select()->orderBy('date', 'desc')->offset($offset)->limit($limit)->get();
         return response([
-            'data' => [
-                'totalCount' => $count,
-                'announcements' => $announcements->map(function(Announcement $announcement) {
-                    return [
-                        'id' => $announcement->id,
-                        'author_id' => $announcement->author_id,
-                        'date' => $announcement->date,
-                        'body' => $announcement->body,
-                        'author' => $announcement->author->name,
-                    ];
-                }),
-            ]
+            'totalCount' => $count,
+            'announcements' => $announcements->map(function(Announcement $announcement) {
+                return [
+                    'id' => $announcement->id,
+                    'author_id' => $announcement->author_id,
+                    'date' => $announcement->date,
+                    'body' => $announcement->body,
+                    'author' => $announcement->author->name,
+                ];
+            }),
         ]);
     }
     public function get(int $id)
