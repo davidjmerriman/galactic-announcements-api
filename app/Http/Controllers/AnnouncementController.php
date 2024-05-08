@@ -17,7 +17,7 @@ class AnnouncementController extends Controller
         $offset = request('offset', 0);
         $limit = request('limit', 100);
         $count = Announcement::count();
-        $announcements = Announcement::select()->offset($offset)->limit($limit)->get();
+        $announcements = Announcement::select()->orderBy('date', 'desc')->offset($offset)->limit($limit)->get();
         return response([
             'data' => [
                 'totalCount' => $count,
