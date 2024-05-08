@@ -13,12 +13,6 @@ class AnnouncementSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 0; $i < 10000; $i++) {
-            $announcement = new Announcement();
-            $announcement->author = 'Fake Author ' . $i;
-            $announcement->date = new \DateTime();
-            $announcement->body = 'Fake Body ' . $i;
-            $announcement->save();
-        }
+        Announcement::factory()->count(10000)->create();
     }
 }
